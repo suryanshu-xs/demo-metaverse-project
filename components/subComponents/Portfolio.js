@@ -1,6 +1,6 @@
 import React from 'react'
 import WorkRoundedIcon from '@mui/icons-material/WorkRounded';
-import { Line } from 'react-chartjs-2'
+import { Line, PolarArea } from 'react-chartjs-2'
 import Chart from 'chart.js/auto';
 
 
@@ -20,6 +20,14 @@ const coinDetails = [
   }
 ]
 
+const getRandom = (limit) => {
+  let arr = []
+  for (let i = 0; i < limit; i++) {
+    arr.push(Math.floor(Math.random() * 30))
+  }
+  return arr
+}
+
 const Portfolio = () => {
 
   const styles = {
@@ -31,8 +39,8 @@ const Portfolio = () => {
     portfolioHeading: 'text-center text-[38px] font-[500] text-[#3b3b3b] flex items-center justify-center',
     portfolioGrowth: 'text-[#c2c2c2] text-[28px] ml-[5px] font-[400]',
     chartContainer: 'max-h-[70px] my-[15px] border-2 rounded-3xl border-gray-300 px-[25px]',
-    coinDetails:'flex flex-col text-center',
-    coinName:'text-[14px] font-[500] text-[#aaaaaa]'
+    coinDetails: 'flex flex-col text-center',
+    coinName: 'text-[14px] font-[500] text-[#aaaaaa]'
   }
 
   return (
@@ -61,7 +69,7 @@ const Portfolio = () => {
               datasets: [
                 {
                   label: 'Wallet 1',
-                  data: [2500, 1000, 2500, 3500, 2500, 1000, 2000, 1000, 2000],
+                  data: getRandom(6),
                   backgroundColor: '#0793f0',
                   borderColor: '#0793f0',
                   borderWidth: 2,
@@ -70,7 +78,7 @@ const Portfolio = () => {
                 },
                 {
                   label: 'Wallet 2',
-                  data: [1300, 1200, 2200, 2000, 2500, 3200, 2200, 3200, 2200],
+                  data: getRandom(6),
                   backgroundColor: '#ed0e5c',
                   borderColor: '#ed0e5c',
                   borderWidth: 2,
@@ -139,9 +147,46 @@ const Portfolio = () => {
 
         </div>
 
-        <div className='border-4 mt-[15px] h-[200px] w-[200px] m-auto rounded-full' >
+        <div className='border-4 mt-[15px] h-[230px] w-[230px] m-auto rounded-full' >
+
+          <PolarArea
+            height={200}
+            width={600}
+
+            options={{
+             
+              plugins: {
+                legend: {
+                  display: false
+                }
+              },
+              
+ 
 
 
+            }}
+
+            data={{
+              labels: [
+                'Binance',
+                'CloneX',
+                'Opensea',
+                'Uniswap',
+                'Metamask'
+              ],
+              datasets: [{
+                label: 'My First Dataset',
+                data: getRandom(5),
+                backgroundColor: [
+                  '#66a1ff',
+                  '#ff5eec',
+                  '#5effb4',
+                  '#ff5c85',
+                  '#ff945e'
+                ]
+              }]
+            }}
+          />
 
         </div>
 

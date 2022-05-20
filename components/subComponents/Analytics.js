@@ -1,20 +1,42 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2'
 import Chart from 'chart.js/auto';
 import InsightsRoundedIcon from '@mui/icons-material/InsightsRounded';
 
-
+const getRandom = () => {
+  let arr = []
+  for (let i = 0; i < 7; i++) {
+    arr.push(Math.floor(Math.random() * 6000))
+  }
+  return arr
+}
 const Analytics = () => {
 
   const [selectedTime, setSelectedTime] = useState('1M')
+  const [dataArrayObj, setDataArrayObj] = useState({
+    data1: getRandom(),
+    data2: getRandom(),
+    data3: getRandom(),
+  })
+
+
+
+  useEffect(() => {
+    setDataArrayObj({
+      data1: getRandom(),
+      data2: getRandom(),
+      data3: getRandom(),
+    })
+  }, [selectedTime])
+
   const styles = {
     wrapper: 'flex-1 min-w-full md:min-w-[400px] md:max-w-full max-w-[350px] max-h-[280px] lg:max-h-[350px] pt-[12px] pb-[12px] bg-white rounded-3xl lg:mx-[25px]',
     body: 'flex items-center justify-between px-[18px]',
     headingContainer: 'flex items-center',
     headingIcon: 'text-[#7c09ad] mr-[12px]',
     heading: 'text-[14px] text-[#787878]',
-    timeSelectorContainer:'mr-[10px] flex  flex-1 items-center justify-end',
-    timeSelectorButton:'text-[11px]  px-[15px] py-[2px] mx-[6px] md:mx-[16px] rounded-full transition-colors font-[500]'
+    timeSelectorContainer: 'mr-[10px] flex  flex-1 items-center justify-end',
+    timeSelectorButton: 'text-[11px]  px-[15px] py-[2px] mx-[6px] md:mx-[16px] rounded-full transition-colors font-[500]'
 
   }
 
@@ -52,7 +74,7 @@ const Analytics = () => {
           datasets: [
             {
               label: 'Wallet 1',
-              data: [1000, 3000, 4500, 5500, 4500, 1000, 2000, 3000, 4000],
+              data: dataArrayObj.data1,
               backgroundColor: '#13ba3f',
               borderColor: '#13ba3f',
               borderWidth: 2,
@@ -61,7 +83,7 @@ const Analytics = () => {
             },
             {
               label: 'Wallet 2',
-              data: [3000, 2200, 4200, 4000, 5000, 1200, 3200, 3200, 5200],
+              data:dataArrayObj.data2,
               backgroundColor: '#949494',
               borderColor: '#949494',
               borderWidth: 2,
@@ -70,7 +92,7 @@ const Analytics = () => {
             },
             {
               label: 'Wallet 3',
-              data: [2000, 4500, 3000, 4500, 4200, 3200, 4200, 5000],
+              data: dataArrayObj.data3,
               backgroundColor: '#e02482',
               borderColor: '#e02482',
               borderWidth: 2,
